@@ -1,0 +1,75 @@
+﻿<Window x:Class="Panel.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Panel"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="900">
+    <Window.Resources>
+        <!-- Style for the TextBlocks used as headers -->
+        <Style x:Key="HeaderTextStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+        <!-- Style for the ListBox -->
+        <Style TargetType="ListBox">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="DarkGray"/>
+            <Setter Property="Padding" Value="5"/>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Список реализованных блюд -->
+        <StackPanel Grid.Column="2" VerticalAlignment="Top">
+            <TextBlock Text="Список реализованных блюд" Style="{StaticResource HeaderTextStyle}"/>
+            <ListBox x:Name="UnimplementedDishesList">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <TextBlock Text="{Binding Name}" FontWeight="Bold"/>
+                            <TextBlock Text="{Binding Weight, StringFormat='Вес: {0}'}"/>
+                            <TextBlock Text="{Binding Calories, StringFormat='Калории: {0}'}"/>
+                            <TextBlock Text="{Binding Nutrients, StringFormat='Питательные вещества: {0}'}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </StackPanel>
+
+        <!-- StackPanel with Buttons -->
+        <StackPanel Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center" Margin="5">
+            <Button x:Name="MoveToUnimplementedButton" Content="Вправо" Click="MoveToUnimplementedButton_Click" Margin="5"/>
+            <Button x:Name="MoveToImplementedButton" Content="Влево" Click="MoveToImplementedButton_Click" Margin="5"/>
+            <Button x:Name="AddDishButton" Content="Добавить блюдо" Click="AddDishButton_Click" Margin="5"/>
+            <Button x:Name="EditDishButton" Content="Изменить блюдо" Click="EditDishButton_Click" Margin="5"/>
+            <Button x:Name="DeleteDishButton" Content="Удалить блюдо" Click="DeleteDishButton_Click" Margin="5"/>
+            <Button x:Name="IngredientsButton" Content="Ингридиенты" Click="IngredientsButton_Click" Margin="5"/>
+        </StackPanel>
+
+        <!-- Список нереализованных блюд -->
+        <StackPanel Grid.Column="0" VerticalAlignment="Top">
+            <TextBlock Text="Список нереализованных блюд" Style="{StaticResource HeaderTextStyle}"/>
+            <ListBox x:Name="ImplementedDishesList">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <TextBlock Text="{Binding Name}" FontWeight="Bold"/>
+                            <TextBlock Text="{Binding Weight, StringFormat='Вес: {0}'}"/>
+                            <TextBlock Text="{Binding Calories, StringFormat='Калории: {0}'}"/>
+                            <TextBlock Text="{Binding Nutrients, StringFormat='Питательные вещества: {0}'}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </StackPanel>
+    </Grid>
+</Window>
